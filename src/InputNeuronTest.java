@@ -1,9 +1,15 @@
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 
+public class InputNeuronTest {
 
-public class inputNeuronTest {
-	public InputNeuron neuron = new InputNeuron();
+	private InputNeuron neuron;
+
+	@Before
+	public void setUp() {
+		neuron = new InputNeuron();
+	}
 
 	@Test
 	/**Tests both set and get*/
@@ -13,6 +19,5 @@ public class inputNeuronTest {
 		neuron.setActivation(-1.1);
 		assertEquals(-1.1, neuron.getActivation(), .001);
 	}
-
 
 }
