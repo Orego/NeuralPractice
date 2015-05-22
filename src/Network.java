@@ -11,15 +11,14 @@ public class Network {
 
 
 	public Network(){
-		output.setInputSize(3);
 		bias.setActivation(1);								//Set bias activation to 1
+		Neuron[] inputs= {a, b, bias};
+		output.setInputs(inputs);
 		double[] weightArray = new double [output.getInputSize()];
 		for(int i = 0; i < 3; i++){
 			weightArray[i] = rand();						//Initialize Weights
 		}
 		output.setWeights(weightArray);
-		Neuron[] inputs= {a, b, bias};
-		output.setInputs(inputs);
 	}
 
 	/**Returns a random double within specified range*/

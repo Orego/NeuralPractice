@@ -15,13 +15,20 @@ public class SigmoidNeuronTest {
 	
 	@Test
 	public void testGetInputSize() {
-		neuron.setInputSize(2);
+		InputNeuron a = new InputNeuron();
+		SigmoidNeuron b = new SigmoidNeuron();
+		Neuron[] inputArray = {a, b};
+		neuron.setInputs(inputArray);
 		assertEquals(2, neuron.getInputSize());
 	}
 	
-
 	@Test
 	public void testGetWeights() {
+		// TODO Initialize weights and inputs in Neuron constructor
+		InputNeuron a = new InputNeuron();
+		SigmoidNeuron b = new SigmoidNeuron();
+		Neuron[] inputArray = {a, b};
+		neuron.setInputs(inputArray);
 		double[] test = {1, 2};
 		neuron.setWeights(test);
 		double[] testTwo = neuron.getWeights();
@@ -47,7 +54,6 @@ public class SigmoidNeuronTest {
 		SigmoidNeuron d = new SigmoidNeuron();
 		c.setActivation(5);
 		d.setActivation(6);
-		neuron.setInputSize(4);
 		Neuron[] inputArray2 = {a, b, c, d};
 		neuron.setInputs(inputArray2);
 		Neuron[] testInputArray2 = neuron.getInputs();
@@ -59,7 +65,6 @@ public class SigmoidNeuronTest {
 
 	@Test
 	public void testComputeActivation() {
-		neuron.setInputSize(2);
 		double[] weights = {1, 2};
 		InputNeuron a = new InputNeuron();
 		SigmoidNeuron b = new SigmoidNeuron();

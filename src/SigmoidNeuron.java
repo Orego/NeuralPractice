@@ -1,81 +1,81 @@
 /** Sigmoid Neuron */
 public class SigmoidNeuron implements Neuron {
 
-	// array of doubles for weights
-	// array of neurons for input
-	// activation
+	/** Returns f(x) where f(x) = 1/(1+(e^-x)) */
+	private static double sigmoid(double x) {
+		return 1 / (1 + Math.exp(-x));
+	}
 
+	/** Output of this neuron. */
 	private double activation;
-	private double[] weights;
+
+	/** Delta value for backpropagation. */
+	private double delta;
+
+	/** Neurons providing input to this neuron. */
 	private Neuron[] inputs;
-	private double delta; 
-	private int inputSize;
 
-	public double getActivation() {
-		return activation;
-	}
+	/** Weights from inputs to this neuron. */
+	private double[] weights;
 
-	public void setActivation(double act) {
-		activation = act;
-	}
-
-	/** Computes and sets activation from inputs & weights using sigmoid function */
+	/**
+	 * Computes and sets activation from inputs & weights using sigmoid function
+	 */
 	public double computeActivation() {
 		double x = 0;
-		for (int i=0; i<inputSize; i++){
+		for (int i = 0; i < inputs.length; i++) {
 			x += (weights[i]) * (inputs[i].getActivation());
 		}
 		return sigmoid(x);
 	}
 
-	/**Sets the double array of weights*/
-	public void setWeights(double w[]) {
-		weights = w;
+	@Override
+	public double getActivation() {
+		return activation;
 	}
 
-	/**returns array of weights*/
-	public double[] getWeights() {
-		return weights;
+	/** returns double Delta value for this Neuron */
+	public double getDelta() {
+		return delta;
 	}
 
-	/**Sets the Neuron array of inputs*/
-	public void setInputs(Neuron[] i) {
-		inputs = i;
-	}
-	
-	public void updateInput(double newAct, int number){
-		inputs[number].setActivation(newAct);
-	}
-	
-	/**Returns array of Neurons*/
+	/** Returns array of Neurons */
 	public Neuron[] getInputs() {
 		return inputs;
 	}
 
-	/**Returns f(x) where f(x) = 1/(1+(e^-x))*/
-	private double sigmoid(double x) {
-		return 1/(1+ (Math.exp(-x)));
+	/** returns int number of inputs for this Neuron */
+	public int getInputSize() {
+		return inputs.length;
 	}
-	
-	/**returns double Delta value for this Neuron*/
-	public double getDelta(){
-		return delta;
+
+	/** returns array of weights */
+	public double[] getWeights() {
+		return weights;
 	}
-	
-	/**Sets double delta value*/
-	public void setDelta(double d){
+
+	@Override
+	public void setActivation(double act) {
+		activation = act;
+	}
+
+	/** Sets double delta value */
+	public void setDelta(double d) {
 		delta = d;
 	}
-	
-	/**returns int number of inputs for this Neuron*/
-	public int getInputSize(){
-		return inputSize;
+
+	/** Sets the Neuron array of inputs */
+	public void setInputs(Neuron[] i) {
+		inputs = i;
 	}
-	
-	/**Sets int number of inputs*/
-	public void setInputSize(int s){
-		inputSize = s;
-	}	
-	
+
+	/** Sets the double array of weights */
+	public void setWeights(double w[]) {
+		weights = w;
+	}
+
+	public void updateInput(double newAct, int number) {
+		inputs[number].setActivation(newAct);
+	}
 
 }
