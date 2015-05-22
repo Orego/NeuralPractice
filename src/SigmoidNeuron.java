@@ -71,6 +71,7 @@ public class SigmoidNeuron implements Neuron {
 
 	/** Sets the double array of weights */
 	public void setWeights(double w[]) {
+		// TODO Break this up into two methods, clearWeights and updateWeights
 		weights = w;
 	}
 
