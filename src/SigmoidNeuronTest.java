@@ -41,35 +41,6 @@ public class SigmoidNeuronTest {
 	}
 
 	@Test
-	public void testGetInputs() {
-		InputNeuron a = new InputNeuron();
-		InputNeuron b = new InputNeuron();
-		a.setActivation(3);
-		b.setActivation(4);
-		Neuron[] inputArray = { a, b };
-		double[] weight = { 5, 4 };
-		neuron = new SigmoidNeuron(inputArray, weight);
-		Neuron[] testInputArray = neuron.getInputs();
-		for (int i = 0; i < neuron.getInputSize(); i++) {
-			assertEquals(inputArray[i].getActivation(),
-					testInputArray[i].getActivation(), .001);
-		}
-		InputNeuron c = new InputNeuron();
-		InputNeuron d = new InputNeuron();
-		c.setActivation(5);
-		d.setActivation(6);
-		Neuron[] inputArray2 = { a, b, c, d };
-		double[] weight2 = { 5, 4, 6, 3 };
-		neuron = new SigmoidNeuron(inputArray2, weight2);
-		Neuron[] testInputArray2 = neuron.getInputs();
-		for (int i = 0; i < neuron.getInputSize(); i++) {
-			assertNotEquals(inputArray2[i].getActivation(), 0, .001);
-			assertEquals(inputArray2[i].getActivation(),
-					testInputArray2[i].getActivation(), .001);
-		}
-	}
-
-	@Test
 	public void testGetWeights() {
 		InputNeuron a = new InputNeuron();
 		InputNeuron b = new InputNeuron();

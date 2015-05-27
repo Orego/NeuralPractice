@@ -5,7 +5,6 @@ public class Network {
 	InputNeuron a = new InputNeuron();
 	InputNeuron b = new InputNeuron();
 	SigmoidNeuron output;
-	double learningRate = 1;
 	double weightMin = -1;
 	double weightMax = 1;
 
@@ -41,15 +40,7 @@ public class Network {
 
 	/** Updates weights based on previously determined delta from output */
 	public void updateWeights() {
-		double[] temp = output.getWeights();
-		Neuron[] tempNeuron = output.getInputs();
-		for (int i = 0; i < output.getInputSize(); i++) {
-			temp[i] += learningRate * (tempNeuron[i].getActivation())
-					* output.getDelta();
-			System.out.println("  weight " + tempNeuron[i].getActivation()
-					+ " " + temp[i]);
-		}
-		output.setWeights(temp);
+		output.updateWeights();
 	}
 
 }

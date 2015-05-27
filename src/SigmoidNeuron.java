@@ -1,11 +1,14 @@
 /** Sigmoid Neuron */
 public class SigmoidNeuron implements Neuron {
 
+	/** Learning rate used in updating weights. */
+	public static final double LEARNING_RATE = 1.0;
+	
 	/** Returns f(x) where f(x) = 1/(1+(e^-x)) */
 	private static double sigmoid(double x) {
 		return 1 / (1 + Math.exp(-x));
 	}
-	
+
 	/** Output of this neuron. */
 	private double activation;
 
@@ -45,11 +48,6 @@ public class SigmoidNeuron implements Neuron {
 		return delta;
 	}
 
-	/** Returns array of Neurons */
-	public Neuron[] getInputs() {
-		return inputs;
-	}
-
 	/** returns int number of inputs for this Neuron */
 	public int getInputSize() {
 		return inputs.length;
@@ -83,6 +81,14 @@ public class SigmoidNeuron implements Neuron {
 
 	public void updateInput(double newAct, int number) {
 		inputs[number].setActivation(newAct);
+	}
+	
+	/** Updates the weights into this neuron, assuming delta has already been set. */
+	public void updateWeights() {
+		for (int i = 0; i < inputs.length; i++) {
+			weights[i] += LEARNING_RATE * (inputs[i].getActivation())
+					* delta;
+		}
 	}
 
 }
