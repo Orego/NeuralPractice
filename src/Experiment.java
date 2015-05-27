@@ -16,7 +16,7 @@ public class Experiment {
 		
 		Network xor = new Network(3, 2);	
 		double[][] training = {{0,0}, {1,0}, {0,1}, {1,1}};
-		double[] trainingCorrect = {0, 1, 1, 1};
+		double[] trainingCorrect = {0, 1, 1, 0};
 		int updates = 1000;
 		for (int i = 0; i < updates; i++) {
 			int k = (int)(Math.random() * training.length);

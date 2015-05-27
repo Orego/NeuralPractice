@@ -53,7 +53,11 @@ public class Network {
 	/** Returns the network's output when inputs are fed in. */
 	public double test(double... inputs) {
 		setInputs(inputs);
+		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
+			hiddenNeurons[i].updateActivation();
+		}
 		output.updateActivation();
+		
 		return output.getActivation();
 	}
 
