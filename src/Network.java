@@ -1,32 +1,19 @@
-import java.util.Random;
-
 public class Network {
-	InputNeuron bias = new InputNeuron();
-	InputNeuron a = new InputNeuron();
-	InputNeuron b = new InputNeuron();
-	SigmoidNeuron output;
-	double weightMin = -1;
-	double weightMax = 1;
+
+	private InputNeuron a;
+	
+	private InputNeuron b;
+
+	private InputNeuron bias;
+	
+	private SigmoidNeuron output;
 
 	public Network() {
-		bias.setActivation(1); // Set bias activation to 1
-		Neuron[] inputs = { a, b, bias };
-		double[] weightArray = new double[inputs.length];
-		for (int i = 0; i < inputs.length; i++) {
-			weightArray[i] = rand(); // Initialize Weights
-		}
-		output = new SigmoidNeuron(inputs, weightArray);
-	}
-
-	/** Returns a random double within specified range */
-	public double rand() {
-		Random rand = new Random();
-		return weightMin + (weightMax - weightMin) * rand.nextDouble();
-	}
-
-	/** Calculates and returns the delta value (double) for output neuron */
-	public void updateDeltaOutput(double correct) {
-		output.updateDelta(correct);
+		a = new InputNeuron();
+		b = new InputNeuron();
+		bias = new InputNeuron();
+		bias.setActivation(1);
+		output = new SigmoidNeuron(new Neuron[] {a, b, bias});
 	}
 
 	public double calculateDeltaHidden(double correct) {
@@ -35,14 +22,24 @@ public class Network {
 				.getActivation()));
 	}
 
+	public SigmoidNeuron getOutput() {
+		return output;
+	}
+
+	/** Sets the activations of the network's input units. */
+	public void setInputs(double... inputs) {
+		a.setActivation(inputs[0]);
+		b.setActivation(inputs[1]);
+	}
+
+	/** Calculates and returns the delta value (double) for output neuron */
+	public void updateDeltaOutput(double correct) {
+		output.updateDelta(correct);
+	}
+
 	/** Updates weights based on previously determined delta from output */
 	public void updateWeights() {
 		output.updateWeights();
-	}
-
-	public void setInputs(double one, double two) {
-		a.setActivation(one);
-		b.setActivation(two);
 	}
 
 }

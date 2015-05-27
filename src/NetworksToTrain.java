@@ -31,20 +31,18 @@ public class NetworksToTrain {
 		
 	private double train(double one, double two, double correct){
 		or.setInputs(one, two);
-		or.output.updateActivation();
-		or.output.updateDelta(correct);
+		SigmoidNeuron output = or.getOutput();
+		output.updateActivation();
+		output.updateDelta(correct);
 		or.updateWeights();
-//		for (int i = 0; i < or.output.getInputSize(); i++){
-//			System.out.print(or.output.getWeights()[i] + " ");
-//		}
-//		System.out.println();
-		or.output.updateActivation();
-		return or.output.getDelta();
+		return output.getDelta();
 	}
 	
 	private double test(double one, double two){
 		or.setInputs(one, two);
-		or.output.updateActivation();
-		return or.output.getActivation();
+		SigmoidNeuron output = or.getOutput();
+		output.updateActivation();
+		return output.getActivation();
 	}
+
 }
