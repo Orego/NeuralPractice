@@ -23,7 +23,7 @@ public class OrNetworkTest {
 		or.output.setWeights(testWeights);
 		Neuron[] testInput = {or.a, or.b, or.bias};
 		or.output.setInputs(testInput);
-		or.output.setActivation(or.output.computeActivation());
+		or.output.updateActivation();
 		or.output.setDelta(or.calculateDeltaOutput(1));
 		assertEquals(or.output.getDelta(), 0.0125155, .001);
 	}

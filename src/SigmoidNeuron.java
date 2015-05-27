@@ -1,3 +1,5 @@
+import javax.naming.OperationNotSupportedException;
+
 /** Sigmoid Neuron */
 public class SigmoidNeuron implements Neuron {
 
@@ -27,17 +29,6 @@ public class SigmoidNeuron implements Neuron {
 		this.weights = weights;
 	}
 
-	/**
-	 * Computes and sets activation from inputs & weights using sigmoid function
-	 */
-	public double computeActivation() {
-		double x = 0;
-		for (int i = 0; i < inputs.length; i++) {
-			x += (weights[i]) * (inputs[i].getActivation());
-		}
-		return sigmoid(x);
-	}
-
 	@Override
 	public double getActivation() {
 		return activation;
@@ -48,19 +39,9 @@ public class SigmoidNeuron implements Neuron {
 		return delta;
 	}
 
-	/** returns int number of inputs for this Neuron */
-	public int getInputSize() {
-		return inputs.length;
-	}
-
-	/** returns array of weights */
-	public double[] getWeights() {
-		return weights;
-	}
-
 	@Override
 	public void setActivation(double act) {
-		activation = act;
+		throw new RuntimeException("The activation of a SigmoidNeuron should not be explicitly set.");
 	}
 
 	/** Sets double delta value */
@@ -77,6 +58,17 @@ public class SigmoidNeuron implements Neuron {
 	public void setWeights(double w[]) {
 		// TODO Break this up into two methods, clearWeights and updateWeights
 		weights = w;
+	}
+
+	/**
+	 * Computes and sets activation from inputs & weights using sigmoid function
+	 */
+	public void updateActivation() {
+		double x = 0;
+		for (int i = 0; i < inputs.length; i++) {
+			x += (weights[i]) * (inputs[i].getActivation());
+		}
+		activation = sigmoid(x);
 	}
 
 	public void updateInput(double newAct, int number) {

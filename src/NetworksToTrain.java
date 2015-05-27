@@ -32,14 +32,14 @@ public class NetworksToTrain {
 	private double train(double one, double two, double right){
 		or.output.updateInput(one, 0);
 		or.output.updateInput(two, 1);
-		or.output.setActivation(or.output.computeActivation());
+		or.output.updateActivation();
 		or.output.setDelta(or.calculateDeltaOutput(right));
 		or.updateWeights();
 //		for (int i = 0; i < or.output.getInputSize(); i++){
 //			System.out.print(or.output.getWeights()[i] + " ");
 //		}
 //		System.out.println();
-		or.output.setActivation(or.output.computeActivation());
+		or.output.updateActivation();
 		return or.output.getDelta();
 	}
 	
@@ -47,7 +47,7 @@ public class NetworksToTrain {
 		or.output.updateInput(one, 0);
 		or.output.updateInput(two, 1);
 		System.out.println();
-		or.output.setActivation(or.output.computeActivation());
+		or.output.updateActivation();
 		return or.output.getActivation();
 	}
 }
