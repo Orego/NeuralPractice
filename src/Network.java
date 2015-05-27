@@ -23,10 +23,12 @@ public class Network {
 	 * neuron.
 	 */
 	public Network(int inputSize, int hiddenNeuronSize) {
+		inputs = new InputNeuron[inputSize];
 		for (int i = 0; i < inputSize; i++) {
 			inputs[i] = new InputNeuron();
 		}
 		inputs[0].setActivation(1);
+		hiddenNeurons = new SigmoidNeuron[hiddenNeuronSize];
 		Neuron[] biasAndHidden = new Neuron[hiddenNeuronSize + 1];
 		// TODO get rid of biasAndHidden through some clever trick
 		biasAndHidden[0] = inputs[0];
@@ -63,8 +65,9 @@ public class Network {
 		setInputs(inputs);
 		output.updateActivation();
 		output.updateDelta(correct);
-		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++){
-			hiddenNeurons[i].updateDelta(output.getDelta(), output.getWeights()[i]);
+		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
+			hiddenNeurons[i].updateDelta(output.getDelta(),
+					output.getWeights()[i]);
 		}
 		updateWeights();
 	}
