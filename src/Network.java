@@ -42,4 +42,19 @@ public class Network {
 		output.updateWeights();
 	}
 
+	/** Trains the network to be more likely to associate the specified inputs with the specified output. */
+	public void train(double correct, double... inputs){
+		setInputs(inputs);
+		output.updateActivation();
+		output.updateDelta(correct);
+		updateWeights();
+	}
+	
+	/** Returns the network's output when inputs are fed in. */
+	public double test(double... inputs){
+		setInputs(inputs);
+		output.updateActivation();
+		return output.getActivation();
+	}
+
 }
