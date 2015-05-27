@@ -71,7 +71,6 @@ public class SigmoidNeuronTest {
 
 	@Test
 	public void testGetWeights() {
-		// TODO Initialize weights and inputs in Neuron constructor
 		InputNeuron a = new InputNeuron();
 		InputNeuron b = new InputNeuron();
 		Neuron[] inputArray = { a, b };
