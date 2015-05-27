@@ -12,7 +12,7 @@ public class Network {
 	public Network() {
 		bias.setActivation(1); // Set bias activation to 1
 		Neuron[] inputs = { a, b, bias };
-		double[] weightArray = new double[output.getInputSize()];
+		double[] weightArray = new double[inputs.length];
 		for (int i = 0; i < inputs.length; i++) {
 			weightArray[i] = rand(); // Initialize Weights
 		}
