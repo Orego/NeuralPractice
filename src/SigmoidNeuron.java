@@ -5,7 +5,7 @@ public class SigmoidNeuron implements Neuron {
 	private static double sigmoid(double x) {
 		return 1 / (1 + Math.exp(-x));
 	}
-
+	
 	/** Output of this neuron. */
 	private double activation;
 
@@ -17,6 +17,12 @@ public class SigmoidNeuron implements Neuron {
 
 	/** Weights from inputs to this neuron. */
 	private double[] weights;
+
+	/** Constructor that initializes the values of inputs and weights */
+	public SigmoidNeuron(Neuron[] inputs, double[] weights){
+		this.inputs = inputs;
+		this.weights = weights;
+	}
 
 	/**
 	 * Computes and sets activation from inputs & weights using sigmoid function
