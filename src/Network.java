@@ -25,15 +25,12 @@ public class Network {
 	}
 
 	/** Calculates and returns the delta value (double) for output neuron */
-	public double calculateDeltaOutput(double correct) {
-		// System.out.println(correct + " " + (output.getActivation() * (1 -
-		// output.getActivation()) * (correct - output.getActivation())));
-		return (output.getActivation() * (1 - output.getActivation()) * (correct - output
-				.getActivation()));
+	public void updateDeltaOutput(double correct) {
+		output.updateDelta(correct);
 	}
 
 	public double calculateDeltaHidden(double correct) {
-
+		// TODO This is wrong!
 		return (output.getActivation() * (1 - output.getActivation()) * (correct - output
 				.getActivation()));
 	}

@@ -24,7 +24,7 @@ public class OrNetworkTest {
 		Neuron[] testInput = {or.a, or.b, or.bias};
 		or.output.setInputs(testInput);
 		or.output.updateActivation();
-		or.output.setDelta(or.calculateDeltaOutput(1));
+		or.output.updateDelta(1);
 		assertEquals(or.output.getDelta(), 0.0125155, .001);
 	}
 

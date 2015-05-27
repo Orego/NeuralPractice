@@ -19,13 +19,14 @@ public class SigmoidNeuronTest {
 	}
 
 	@Test
-	public void testGetDelta() {
+	public void testUpdateDelta() {
 		InputNeuron a = new InputNeuron();
 		Neuron[] input = { a, a };
 		double[] weight = { 2, 3 };
 		neuron = new SigmoidNeuron(input, weight);
-		neuron.setDelta(1.2);
-		assertEquals(1.2, neuron.getDelta(), .001);
+		neuron.setActivation(0.1);
+		neuron.updateDelta(1);
+		assertEquals(0.081, neuron.getDelta(), .0001);
 	}
 
 }

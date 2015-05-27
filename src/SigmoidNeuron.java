@@ -1,5 +1,3 @@
-import javax.naming.OperationNotSupportedException;
-
 /** Sigmoid Neuron */
 public class SigmoidNeuron implements Neuron {
 
@@ -41,12 +39,12 @@ public class SigmoidNeuron implements Neuron {
 
 	@Override
 	public void setActivation(double act) {
-		throw new RuntimeException("The activation of a SigmoidNeuron should not be explicitly set.");
+		activation = act;
 	}
 
-	/** Sets double delta value */
-	public void setDelta(double d) {
-		delta = d;
+	/** Updates delta value given the correct output. */
+	public void updateDelta(double correct) {
+		delta = activation * (1 - activation) * (correct - activation);
 	}
 
 	/** Sets the Neuron array of inputs */

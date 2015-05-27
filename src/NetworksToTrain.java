@@ -29,11 +29,11 @@ public class NetworksToTrain {
 		}
 	}	
 		
-	private double train(double one, double two, double right){
+	private double train(double one, double two, double correct){
 		or.output.updateInput(one, 0);
 		or.output.updateInput(two, 1);
 		or.output.updateActivation();
-		or.output.setDelta(or.calculateDeltaOutput(right));
+		or.output.updateDelta(correct);
 		or.updateWeights();
 //		for (int i = 0; i < or.output.getInputSize(); i++){
 //			System.out.print(or.output.getWeights()[i] + " ");
