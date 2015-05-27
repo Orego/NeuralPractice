@@ -3,7 +3,7 @@ public class Experiment {
 	public static void main(String[] args) {
 		Network or = new Network();	
 		double[][] training = {{0,0}, {1,0}, {0,1}, {1,1}};
-		double[] trainingCorrect = {1, 0, 1, 1};
+		double[] trainingCorrect = {0, 1, 1, 1};
 		int updates = 1000;
 		for (int i = 0; i < updates; i++) {
 			int k = (int)(Math.random() * training.length);

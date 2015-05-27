@@ -4,20 +4,15 @@ public class Network {
 	
 	private SigmoidNeuron[] hiddenNeurons;
 	
-	private InputNeuron a;
-	
-	private InputNeuron b;
-
-	private InputNeuron bias;
-	
 	private SigmoidNeuron output;
 
 	public Network() {
-		a = new InputNeuron();
-		b = new InputNeuron();
-		bias = new InputNeuron();
-		bias.setActivation(1);
-		output = new SigmoidNeuron(new Neuron[] {a, b, bias});
+		inputs = new InputNeuron[3];
+		inputs[1] = new InputNeuron();
+		inputs[2] = new InputNeuron();
+		inputs[0] = new InputNeuron();
+		inputs[0].setActivation(1);
+		output = new SigmoidNeuron(inputs);
 	}
 	
 	/**Constructs Network with a specified number of inputs including the bias input
@@ -49,9 +44,10 @@ public class Network {
 	}
 
 	/** Sets the activations of the network's input units. */
-	public void setInputs(double... inputs) {
-		a.setActivation(inputs[0]);
-		b.setActivation(inputs[1]);
+	public void setInputs(double... input) {
+		for (int i = 1; i < inputs.length; i++){
+			inputs[i].setActivation(input[i-1]);
+		}
 	}
 
 	/** Calculates and returns the delta value (double) for output neuron */
