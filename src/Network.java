@@ -40,4 +40,9 @@ public class Network {
 		output.updateWeights();
 	}
 
+	public void setInputs(double one, double two) {
+		a.setActivation(one);
+		b.setActivation(two);
+	}
+
 }

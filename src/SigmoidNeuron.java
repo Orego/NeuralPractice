@@ -16,7 +16,7 @@ public class SigmoidNeuron implements Neuron {
 	private double delta;
 
 	/** Neurons providing input to this neuron. */
-	private Neuron[] inputs;
+	private final Neuron[] inputs;
 
 	/** Weights from inputs to this neuron. */
 	private double[] weights;
@@ -42,19 +42,8 @@ public class SigmoidNeuron implements Neuron {
 		activation = act;
 	}
 
-	/** Updates delta value given the correct output. */
-	public void updateDelta(double correct) {
-		delta = activation * (1 - activation) * (correct - activation);
-	}
-
-	/** Sets the Neuron array of inputs */
-	public void setInputs(Neuron[] i) {
-		inputs = i;
-	}
-
-	/** Sets the double array of weights */
+	/** Sets the double array of weights. For testing only. */
 	public void setWeights(double w[]) {
-		// TODO Break this up into two methods, clearWeights and updateWeights
 		weights = w;
 	}
 
@@ -69,10 +58,11 @@ public class SigmoidNeuron implements Neuron {
 		activation = sigmoid(x);
 	}
 
-	public void updateInput(double newAct, int number) {
-		inputs[number].setActivation(newAct);
+	/** Updates delta value given the correct output. */
+	public void updateDelta(double correct) {
+		delta = activation * (1 - activation) * (correct - activation);
 	}
-	
+
 	/** Updates the weights into this neuron, assuming delta has already been set. */
 	public void updateWeights() {
 		for (int i = 0; i < inputs.length; i++) {

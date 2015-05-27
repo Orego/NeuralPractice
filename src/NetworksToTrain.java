@@ -30,8 +30,7 @@ public class NetworksToTrain {
 	}	
 		
 	private double train(double one, double two, double correct){
-		or.output.updateInput(one, 0);
-		or.output.updateInput(two, 1);
+		or.setInputs(one, two);
 		or.output.updateActivation();
 		or.output.updateDelta(correct);
 		or.updateWeights();
@@ -44,9 +43,7 @@ public class NetworksToTrain {
 	}
 	
 	private double test(double one, double two){
-		or.output.updateInput(one, 0);
-		or.output.updateInput(two, 1);
-		System.out.println();
+		or.setInputs(one, two);
 		or.output.updateActivation();
 		return or.output.getActivation();
 	}
