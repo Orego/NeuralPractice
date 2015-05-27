@@ -1,9 +1,9 @@
 public class Network {
 
-	private InputNeuron[] inputs;
-	
 	private SigmoidNeuron[] hiddenNeurons;
-	
+
+	private InputNeuron[] inputs;
+
 	private SigmoidNeuron output;
 
 	public Network() {
@@ -13,30 +13,28 @@ public class Network {
 		inputs[0] = new InputNeuron();
 		inputs[0].setActivation(1);
 		output = new SigmoidNeuron(inputs);
+		hiddenNeurons = null;
 	}
-	
-	/**Constructs Network with a specified number of inputs including the bias input
-	 * and a specified number of hiddenNeurons. For now, it's layer-size 2 and has one output
-	 * In the inputs array, the 0th element is the bias neuron. */
+
+	/**
+	 * Constructs Network with a specified number of inputs including the bias
+	 * input and a specified number of hiddenNeurons. For now, it's layer-size 2
+	 * and has one output In the inputs array, the 0th element is the bias
+	 * neuron.
+	 */
 	public Network(int inputSize, int hiddenNeuronSize) {
-		for (int i = 0; i<inputSize; i++){
+		for (int i = 0; i < inputSize; i++) {
 			inputs[i] = new InputNeuron();
 		}
 		inputs[0].setActivation(1);
 		Neuron[] biasAndHidden = new Neuron[hiddenNeuronSize + 1];
-		//TODO get rid of biasAndHidden through some clever trick
+		// TODO get rid of biasAndHidden through some clever trick
 		biasAndHidden[0] = inputs[0];
-		for (int i = 0; i<hiddenNeuronSize; i++){
+		for (int i = 0; i < hiddenNeuronSize; i++) {
 			hiddenNeurons[i] = new SigmoidNeuron(inputs);
-			biasAndHidden[i+1] = hiddenNeurons[i];
+			biasAndHidden[i + 1] = hiddenNeurons[i];
 		}
 		output = new SigmoidNeuron(biasAndHidden);
-	}
-
-	public double calculateDeltaHidden(double correct) {
-		// TODO This is wrong!
-		return (output.getActivation() * (1 - output.getActivation()) * (correct - output
-				.getActivation()));
 	}
 
 	public SigmoidNeuron getOutput() {
@@ -45,9 +43,30 @@ public class Network {
 
 	/** Sets the activations of the network's input units. */
 	public void setInputs(double... input) {
-		for (int i = 1; i < inputs.length; i++){
-			inputs[i].setActivation(input[i-1]);
+		for (int i = 1; i < inputs.length; i++) {
+			inputs[i].setActivation(input[i - 1]);
 		}
+	}
+
+	/** Returns the network's output when inputs are fed in. */
+	public double test(double... inputs) {
+		setInputs(inputs);
+		output.updateActivation();
+		return output.getActivation();
+	}
+
+	/**
+	 * Trains the network to be more likely to associate the specified inputs
+	 * with the specified output.
+	 */
+	public void train(double correct, double... inputs) {
+		setInputs(inputs);
+		output.updateActivation();
+		output.updateDelta(correct);
+		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++){
+			hiddenNeurons[i].updateDelta(output.getDelta(), output.getWeights()[i]);
+		}
+		updateWeights();
 	}
 
 	/** Calculates and returns the delta value (double) for output neuron */
@@ -58,21 +77,6 @@ public class Network {
 	/** Updates weights based on previously determined delta from output */
 	public void updateWeights() {
 		output.updateWeights();
-	}
-
-	/** Trains the network to be more likely to associate the specified inputs with the specified output. */
-	public void train(double correct, double... inputs){
-		setInputs(inputs);
-		output.updateActivation();
-		output.updateDelta(correct);
-		updateWeights();
-	}
-	
-	/** Returns the network's output when inputs are fed in. */
-	public double test(double... inputs){
-		setInputs(inputs);
-		output.updateActivation();
-		return output.getActivation();
 	}
 
 }
