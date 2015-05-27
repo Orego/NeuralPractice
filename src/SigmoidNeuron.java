@@ -37,7 +37,7 @@ public class SigmoidNeuron implements Neuron {
 	}
 
 	/** Connects this SigmoidNeuron to the specified inputs with random weights. */
-	public SigmoidNeuron(Neuron[] inputs) {
+	public SigmoidNeuron(Neuron... inputs) {
 		this.inputs = inputs;
 		weights = new double[inputs.length];
 		for (int i = 0; i < weights.length; i++) {

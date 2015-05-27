@@ -1,5 +1,9 @@
 public class Network {
 
+	private InputNeuron[] inputs;
+	
+	private SigmoidNeuron[] hiddenNeurons;
+	
 	private InputNeuron a;
 	
 	private InputNeuron b;
@@ -14,6 +18,24 @@ public class Network {
 		bias = new InputNeuron();
 		bias.setActivation(1);
 		output = new SigmoidNeuron(new Neuron[] {a, b, bias});
+	}
+	
+	/**Constructs Network with a specified number of inputs including the bias input
+	 * and a specified number of hiddenNeurons. For now, it's layer-size 2 and has one output
+	 * In the inputs array, the 0th element is the bias neuron. */
+	public Network(int inputSize, int hiddenNeuronSize) {
+		for (int i = 0; i<inputSize; i++){
+			inputs[i] = new InputNeuron();
+		}
+		inputs[0].setActivation(1);
+		Neuron[] biasAndHidden = new Neuron[hiddenNeuronSize + 1];
+		//TODO get rid of biasAndHidden through some clever trick
+		biasAndHidden[0] = inputs[0];
+		for (int i = 0; i<hiddenNeuronSize; i++){
+			hiddenNeurons[i] = new SigmoidNeuron(inputs);
+			biasAndHidden[i+1] = hiddenNeurons[i];
+		}
+		output = new SigmoidNeuron(biasAndHidden);
 	}
 
 	public double calculateDeltaHidden(double correct) {
