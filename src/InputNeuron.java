@@ -12,5 +12,9 @@ public class InputNeuron implements Neuron {
 	public void setActivation(double act) {
 		activation = act;
 	}
-
+	
+	@Override
+	public String toString(){
+		return "Activation of Input Neuron = " + activation + "\n";
+	}
 }
