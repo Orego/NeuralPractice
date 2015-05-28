@@ -95,7 +95,7 @@ public class SigmoidNeuron implements Neuron {
 	 * this neuron for a hidden Neuron.
 	 */
 	public void updateDelta(double outputDelta, double weightToOutput) {
-		delta = activation * (1 - activation) * weightToOutput * outputDelta;
+		delta = activation * (1 - activation) * weightToOutput;
 //		System.out.println("hidden delta: " + delta);
 	}
 
