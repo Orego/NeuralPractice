@@ -7,4 +7,7 @@ public interface Neuron {
 	/**Sets activation with double*/
 	public void setActivation(double act);
 	
+	/**Prints out the relevant information*/
+	public String toString();
+	
 }

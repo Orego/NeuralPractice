@@ -37,10 +37,11 @@ public class Network {
 		// TODO get rid of biasAndHidden through some clever trick
 		biasAndHidden[0] = inputs[0];
 		for (int i = 0; i < hiddenNeuronSize; i++) {
-			hiddenNeurons[i] = new SigmoidNeuron(inputs);
+			hiddenNeurons[i] = new SigmoidNeuron(inputs, new double[] {.1 +i*.3, .2+i*.3, .3+i*.3});
 			biasAndHidden[i + 1] = hiddenNeurons[i];
 		}
 		output = new SigmoidNeuron(biasAndHidden);
+		System.out.println(output);
 	}
 
 	public SigmoidNeuron getOutput() {
