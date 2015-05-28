@@ -6,6 +6,10 @@ public class Network {
 
 	private SigmoidNeuron output;
 
+	/**
+	 * Constructs a network that can be used for and, or, etc. (but not xor). It
+	 * has two input nodes, 1 bias, and no hidden units.
+	 */
 	public Network() {
 		inputs = new InputNeuron[3];
 		inputs[1] = new InputNeuron();
@@ -54,10 +58,11 @@ public class Network {
 	public double test(double... inputs) {
 		setInputs(inputs);
 		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
-			hiddenNeurons[i].updateActivation();
+			if (i >= 1) {
+				hiddenNeurons[i].updateActivation();
+			}
 		}
 		output.updateActivation();
-		
 		return output.getActivation();
 	}
 
@@ -67,6 +72,9 @@ public class Network {
 	 */
 	public void train(double correct, double... inputs) {
 		setInputs(inputs);
+		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
+			hiddenNeurons[i].updateActivation();
+		}
 		output.updateActivation();
 		output.updateDelta(correct);
 		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
@@ -84,7 +92,7 @@ public class Network {
 	/** Updates weights based on previously determined delta from output */
 	public void updateWeights() {
 		output.updateWeights();
-		for (int i = 1; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
+		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
 			hiddenNeurons[i].updateWeights();
 		}
 	}

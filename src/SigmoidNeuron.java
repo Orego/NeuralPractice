@@ -84,9 +84,10 @@ public class SigmoidNeuron implements Neuron {
 		activation = sigmoid(x);
 	}
 
-	/** Updates delta value given the correct output. */
+	/** Updates delta value given the correct output for an output neuron. */
 	public void updateDelta(double correct) {
 		delta = activation * (1 - activation) * (correct - activation);
+//		System.out.println("output delta: " + delta);
 	}
 
 	/**
@@ -95,6 +96,7 @@ public class SigmoidNeuron implements Neuron {
 	 */
 	public void updateDelta(double outputDelta, double weightToOutput) {
 		delta = activation * (1 - activation) * weightToOutput * outputDelta;
+//		System.out.println("hidden delta: " + delta);
 	}
 
 	/**
