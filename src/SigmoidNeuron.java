@@ -34,14 +34,6 @@ public class SigmoidNeuron implements Neuron {
 	/** Weights from inputs to this neuron. */
 	private double[] weights;
 
-	public String toString(){
-		String print = "Activation of Sigmoid Neuron = " + activation + "\n";
-		for(int i = 0; i < inputs.length; i++){
-			print += inputs[i].toString();
-		}
-		return print;
-	}
-	
 	/** Connects this SigmoidNeuron to the specified inputs with random weights. */
 	public SigmoidNeuron(Neuron... inputs) {
 		this.inputs = inputs;
@@ -50,7 +42,7 @@ public class SigmoidNeuron implements Neuron {
 			weights[i] = rand();
 		}
 	}
-
+	
 	/** Constructor that initializes the values of inputs and weights */
 	public SigmoidNeuron(Neuron[] inputs, double[] weights) {
 		this.inputs = inputs;
@@ -67,6 +59,10 @@ public class SigmoidNeuron implements Neuron {
 		return delta;
 	}
 
+	public double[] getWeights(){
+		return weights;
+	}
+
 	@Override
 	public void setActivation(double act) {
 		activation = act;
@@ -76,9 +72,12 @@ public class SigmoidNeuron implements Neuron {
 	public void setWeights(double w[]) {
 		weights = w;
 	}
-	
-	public double[] getWeights(){
-		return weights;
+	public String toString(){
+		String print = "Activation of Sigmoid Neuron = " + activation + "\n";
+		for(int i = 0; i < inputs.length; i++){
+			print += inputs[i].toString();
+		}
+		return print;
 	}
 
 	/**
