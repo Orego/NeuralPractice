@@ -59,9 +59,7 @@ public class Network {
 	public double test(double... inputs) {
 		setInputs(inputs);
 		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
-			if (i >= 1) {
-				hiddenNeurons[i].updateActivation();
-			}
+			hiddenNeurons[i].updateActivation();
 		}
 		output.updateActivation();
 		return output.getActivation();
@@ -80,7 +78,7 @@ public class Network {
 		output.updateDelta(correct);
 		for (int i = 0; hiddenNeurons != null && i < hiddenNeurons.length; i++) {
 			hiddenNeurons[i].updateDelta(output.getDelta(),
-					output.getWeights()[i]);
+					output.getWeights()[i+1]);
 		}
 		updateWeights();
 	}
