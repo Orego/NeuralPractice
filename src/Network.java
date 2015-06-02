@@ -41,7 +41,6 @@ public class Network {
 			biasAndHidden[i + 1] = hiddenNeurons[i];
 		}
 		output = new SigmoidNeuron(biasAndHidden);
-		System.out.println(output);
 	}
 
 	public SigmoidNeuron getOutput() {
